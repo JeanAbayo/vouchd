@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-// import { View } from 'react-native';
 import { connect, Provider } from 'react-redux';
 import { Router, Scene } from 'react-native-router-flux';
 import store from './config/ConfigureStore';
 import Splash from './containers/Splash';
-import Login from './containers/Login';
+import Home from './containers/Home';
 
 const RouterWithRedux = connect()(Router);
 
@@ -22,7 +21,7 @@ export default class App extends Component {
             />
             <Scene
               key="login"
-              component={Login}
+              component={Home}
               title="Login"
               hideNavBar={true}
             />
