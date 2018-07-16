@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect, Provider } from 'react-redux';
-import { Router, Scene } from 'react-native-router-flux';
+import { Router, Scene, Modal } from 'react-native-router-flux';
 import store from './config/ConfigureStore';
 import Splash from './containers/Splash';
 import Home from './containers/Home';
@@ -12,7 +12,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <RouterWithRedux>
-          <Scene key="root">
+          <Modal key="root" hideNavBar>
             <Scene
               key="splash"
               component={Splash}
@@ -25,7 +25,7 @@ export default class App extends Component {
               title="Login"
               hideNavBar={true}
             />
-          </Scene>
+          </Modal>
         </RouterWithRedux>
       </Provider>
     );
