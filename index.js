@@ -5,4 +5,4 @@ YellowBox.ignoreWarnings([
   'Module RCTImageLoader'
 ]);
 
-AppRegistry.registerComponent('VouchD', () => App);
+AppRegistry.registerComponent('Voucha', () => App);
