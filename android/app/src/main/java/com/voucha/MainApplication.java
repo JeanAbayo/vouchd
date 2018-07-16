@@ -1,4 +1,4 @@
-package com.vouchd;
+package com.Voucha;
 
 import android.app.Application;
 
