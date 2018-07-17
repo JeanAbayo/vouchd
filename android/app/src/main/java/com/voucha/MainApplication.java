@@ -10,6 +10,7 @@ import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.airbnb.android.react.maps.MapsPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.react.ReactNativeHost;
@@ -39,6 +40,7 @@ public class MainApplication extends Application implements ReactApplication {
             new LottiePackage(),
             new LinearGradientPackage(),
             new VectorIconsPackage(),
+            new MapsPackage(),
             new FBSDKPackage(mCallbackManager)
       );
     }
