@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import { connect, Provider } from 'react-redux';
+import { ApolloClient } from 'apollo-client';
+import { ApolloProvider } from 'react-apollo';
 import { Router, Scene, Modal } from 'react-native-router-flux';
-import store from './config/ConfigureStore';
 import Splash from './containers/Splash';
 import Home from './containers/Home';
 
-const RouterWithRedux = connect()(Router);
+const client = new ApolloClient();
 
 export default class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-        <RouterWithRedux>
+      <ApolloProvider client={client}>
+        <Router>
           <Modal key="root" hideNavBar>
             <Scene
               key="splash"
@@ -26,8 +26,8 @@ export default class App extends Component {
               hideNavBar={true}
             />
           </Modal>
-        </RouterWithRedux>
-      </Provider>
+        </Router>
+      </ApolloProvider>
     );
   }
 }
