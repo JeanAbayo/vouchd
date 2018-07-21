@@ -11,6 +11,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF'
   },
+  loginContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    paddingBottom: 150,
+  },
+  fbLoginBtn: {
+    backgroundColor: '#4267B2',
+    height: 45,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 300,
+    borderRadius: 8
+  },
+  fbLoginBtnText:{
+    color: '#fff',
+    fontSize: 20,
+  },
   splash: {
     flex: 1,
     justifyContent: 'center',

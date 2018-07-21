@@ -1,39 +1,65 @@
 import React, { Component } from 'react';
-import {
-  View,
-  StatusBar,
-} from 'react-native';
+import { View, ImageBackground, TouchableHighlight, Text } from 'react-native';
+import { _ } from "lodash";
+import Icon from 'react-native-vector-icons/Ionicons';
 import * as FBSDK from 'react-native-fbsdk';
 import { styles } from '../styles';
-const { LoginButton, AccessToken } = FBSDK;
+import { Actions } from '../../node_modules/react-native-router-flux';
+const { LoginManager } = FBSDK;
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+  handleFacebookLogin() {
+    LoginManager.logInWithReadPermissions([
+      'public_profile',
+      'email'
+    ]).then(
+      function(result) {
+        if (result.isCancelled) {
+          console.log('Login cancelled');
+        } else {
+          if (
+            _.includes(result.grantedPermissions, 'email') &&
+            _.includes(result.grantedPermissions, 'public_profile')
+          ){
+            Actions.home();
+          }
+          else{
+            alert('Please let us know, By granting access to your facebook profile');
+          }
+        }
+      },
+      function(error) {
+        console.log('Login fail with error: ' + error);
+      }
+    );
+  }
   render() {
     return (
-      <View style={styles.container}>
-        <StatusBar hidden={true} />
+      <ImageBackground
+        source={require('../assets/images/splash-photo.jpg')}
+        style={styles.loginContainer}
+      >
         <View>
-          <LoginButton
-            publishPermissions={['publish_actions']}
-            onLoginFinished={(error, result) => {
-              if (error) {
-                alert('login has error: ' + result.error);
-              } else if (result.isCancelled) {
-                alert('login is cancelled.');
-              } else {
-                AccessToken.getCurrentAccessToken().then(data => {
-                  alert(data.accessToken.toString());
-                });
-              }
-            }}
-            onLogoutFinished={() => alert('logout.')}
-          />
+          <View>
+            <TouchableHighlight
+              onPress={this.handleFacebookLogin}
+              underlayColor="rgba(0,0,0,0)"
+            >
+              <View style={styles.fbLoginBtn}>
+                <Text style={styles.fbLoginBtnText}>
+                  <Icon name="logo-facebook" size={20} />
+                  {'   '}
+                  Login with facebook{' '}
+                </Text>
+              </View>
+            </TouchableHighlight>
+          </View>
         </View>
-      </View>
+      </ImageBackground>
     );
   }
 }
