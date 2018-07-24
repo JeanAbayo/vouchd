@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { View, ImageBackground, TouchableHighlight, Text } from 'react-native';
-import { _ } from "lodash";
+import { _ } from 'lodash';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as FBSDK from 'react-native-fbsdk';
 import { styles } from '../styles';
-import { Actions } from '../../node_modules/react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 const { LoginManager } = FBSDK;
 
 export default class Login extends Component {
@@ -13,22 +13,20 @@ export default class Login extends Component {
     this.state = {};
   }
   handleFacebookLogin() {
-    LoginManager.logInWithReadPermissions([
-      'public_profile',
-      'email'
-    ]).then(
+    LoginManager.logInWithReadPermissions(['public_profile', 'email']).then(
       function(result) {
         if (result.isCancelled) {
-          console.log('Login cancelled');
+          alert('Login with your Facebook account!');
         } else {
           if (
             _.includes(result.grantedPermissions, 'email') &&
             _.includes(result.grantedPermissions, 'public_profile')
-          ){
-            Actions.home();
-          }
-          else{
-            alert('Please let us know, By granting access to your facebook profile');
+          ) {
+            Actions.account({ type: 'reset' });
+          } else {
+            alert(
+              'Please let us know, By granting access to your facebook profile'
+            );
           }
         }
       },
