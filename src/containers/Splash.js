@@ -3,28 +3,25 @@ import { View, Text, StatusBar } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Animation from 'lottie-react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import * as FBSDK from 'react-native-fbsdk';
 import anim from '../assets/anim/logo-anim.json';
 import { styles, splashGradient } from '../styles';
-import * as FBSDK from 'react-native-fbsdk';
 
 const { AccessToken } = FBSDK;
 export default class Splash extends Component {
   componentDidMount() {
     this.animation.play();
-    // setTimeout(() => {
-    //   Actions.login();
-    // }, 970);
-    AccessToken.getCurrentAccessToken()
-      .then(data => {
-        // alert(data.accessToken.toString());
-        if (data) {
-          Actions.home();
-        }
-        else{
-          Actions.login();
-        }
-      })
-      .catch(error => Actions.login());
+    setTimeout(() => {
+      AccessToken.getCurrentAccessToken()
+        .then(data => {
+          if (data) {
+            Actions.account({ type: 'reset' });
+          } else {
+            Actions.login({ type: 'reset' });
+          }
+        })
+        .catch(error => Actions.login({ type: 'reset' }));
+    }, 900);
   }
   render() {
     return (
@@ -35,10 +32,7 @@ export default class Splash extends Component {
             ref={animation => {
               this.animation = animation;
             }}
-            style={{
-              width: 180,
-              height: 180
-            }}
+            style={styles.logoAnim}
             loop={true}
             source={anim}
           />
