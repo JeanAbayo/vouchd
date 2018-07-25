@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { View, StatusBar, Text } from 'react-native';
+import { View, StatusBar, Text, ScrollView } from 'react-native';
 import { styles } from '../styles';
 
+const Offer = () => (
+  <Text>Ok</Text>
+);
 export default class Offers extends Component {
   constructor(props) {
     super(props);
@@ -9,10 +12,14 @@ export default class Offers extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.contentContainer}>
         <StatusBar hidden={true} />
         <View>
-          <Text>Offers</Text>
+          <ScrollView>
+            <View>
+              <Offer />
+            </View>
+          </ScrollView>
         </View>
       </View>
     );
