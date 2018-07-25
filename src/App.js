@@ -37,7 +37,7 @@ export default class App extends Component {
               key="offers"
               component={Offers}
               title="Offers"
-              hideNavBar={true}
+              hideNavBar={false}
             />
             <Scene
               key="shops"

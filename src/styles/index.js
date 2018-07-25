@@ -11,6 +11,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF'
   },
+  contentContainer: {
+    flex: 1,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    backgroundColor: '#F5FCFF'
+  },
   loginContainer: {
     flex: 1,
     justifyContent: 'flex-end',
