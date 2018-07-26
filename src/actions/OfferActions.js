@@ -6,16 +6,16 @@ export const addOffer = data => {
   return dispatch => {
     dispatch({ type: ADDING_OFFER });
     const { title, description, offer, image } = data;
+    var newOfferKey = firebase
+      .database()
+      .ref()
+      .child('offers')
+      .push().key;
     return firebase
       .storage()
-      .ref('img')
+      .ref('offers/' + newOfferKey)
       .putFile(image)
       .then(uploadedFile => {
-        var newOfferKey = firebase
-          .database()
-          .ref()
-          .child('offers')
-          .push().key;
         var shop_uid = store.getState().user.uuid;
         var offerData = {
           title: title,
