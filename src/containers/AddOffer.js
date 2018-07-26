@@ -67,7 +67,7 @@ class AddOffer extends Component {
   };
   render() {
     return (
-      <ScrollView>
+      <ScrollView style={{marginBottom: 100}}>
         <View style={styles.contentContainer}>
           <StatusBar hidden={true} />
           <View>
