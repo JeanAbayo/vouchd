@@ -3,10 +3,13 @@ import { View, Text, StatusBar } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Animation from 'lottie-react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import * as FBSDK from 'react-native-fbsdk';
 import firebase from 'react-native-firebase';
 import anim from '../assets/anim/logo-anim.json';
 import { styles, splashGradient } from '../styles';
+import { gotUser } from '../actions/UserActions';
 
 const { AccessToken } = FBSDK;
 const loginWithFb = accessToken => {
@@ -15,23 +18,31 @@ const loginWithFb = accessToken => {
     .auth()
     .signInAndRetrieveDataWithCredential(credential)
     .then(result => {
-      console.log(result);
+      return result;
     })
     .catch(error => {
-      console.log(error);
+      return error;
     });
 };
-export default class Splash extends Component {
+class Splash extends Component {
+  constructor(props){
+    super(props);
+  }
   componentDidMount() {
     this.animation.play();
     setTimeout(() => {
       AccessToken.getCurrentAccessToken()
         .then(data => {
           if (data) {
-            // console.log(data.accessToken);
             loginWithFb(data.accessToken)
               .then(result => {
-                console.log(result);
+                const user = {
+                  name: result.user.displayName,
+                  photo: result.user.photoURL,
+                  email: result.user.email,
+                  uuid: result.user.uid
+                };
+                this.props.gotUser(user);
               })
               .catch(error => {
                 console.log(error);
@@ -63,3 +74,17 @@ export default class Splash extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+});
+
+const mapDispatchToProps = dispatch => ({
+  gotUser: data => dispatch(gotUser(data))
+});
+Splash.propTypes = {
+  gotUser: PropTypes.func,
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Splash);
