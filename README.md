@@ -2,9 +2,7 @@
 
 **Voucha** is a platform that leverages facebook technologies to empower connection between local vendors and their online/offline customers.
 
-**Voucha** helps customers know which business has the best **vouchers**, **discounts**, **coupons**, and **promos** in their neighborhood.
-
-**Voucha** helps local businesses advertize their new products and turn customers into friends .
+**Voucha** helps customers know which business in their neighborhood has the best **offers** and **deals**.
 
 ## Mobile application 📱
 
@@ -12,7 +10,7 @@ Voucha has an android and ios mobile app. Below is how to set up and run the app
 
 ### Prerequisites
 
-Voucha is using `reac-native 0.56.0`. 
+Voucha is using `reac-native 0.56.0`.
 
 Setup for react native development, check more from [here](https://facebook.github.io/react-native/) for both ios and android.
 

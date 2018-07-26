@@ -1,12 +1,16 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import reducers from '../reducers';
 
 const configureStore = () => {
   // create store...
-  const middleware = [thunk];
-  const store = compose(applyMiddleware(...middleware))(createStore)(reducers);
+  // const store = createStore(
+  //   reducers,
+  const redux_env = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+  //   applyMiddleware(thunk)
+  // );
+  const store = createStore(reducers, redux_env , applyMiddleware(thunk));
   return store;
 };
-const store = configureStore();
-export default store;
+
+export default configureStore();

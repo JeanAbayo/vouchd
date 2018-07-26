@@ -7,11 +7,16 @@
     "test": "jest"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "lodash": "^4.17.10",
     "lottie-react-native": "^2.5.0",
+    "moment": "^2.22.2",
     "react": "16.4.1",
     "react-native": "0.56.0",
+    "react-native-calendar-select": "^0.1.2",
+    "react-native-calendars": "^1.19.4",
     "react-native-fbsdk": "^0.7.0",
+    "react-native-firebase": "^4.3.8",
+    "react-native-image-picker": "^0.26.10",
     "react-native-linear-gradient": "^2.4.0",
     "react-native-maps": "^0.21.0",
     "react-native-router-flux": "^4.0.0-beta.31",
@@ -19,12 +24,19 @@
     "react-native-vector-icons": "^4.6.0",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "babel-eslint": "^8.2.4",
     "babel-jest": "23.4.0",
+    "babel-preset-flow": "^6.23.0",
     "babel-preset-react-native": "^5",
+    "eslint": "^4.19.1",
+    "eslint-plugin-react": "^7.9.1",
+    "flow-bin": "^0.67.1",
     "jest": "23.4.1",
+    "prettier-eslint": "^8.8.2",
     "react-test-renderer": "16.4.1"
   },
   "jest": {
