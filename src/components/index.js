@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   View,
-  // Dimensions,
   Text,
   TouchableOpacity,
   TextInput
@@ -50,6 +49,7 @@ export const Btn = props => (
       borderColor: colors.primary,
       backgroundColor: colors.primary
     }}
+    onPress={() => props.action()}
   >
     <View
       style={{
@@ -105,7 +105,8 @@ PickDate.propTypes = {
 };
 Btn.propTypes = {
   endLabel: PropTypes.string,
-  icon: PropTypes.string
+  icon: PropTypes.string,
+  action: PropTypes.func,
 };
 Input.propTypes = {
   endLabel: PropTypes.string,

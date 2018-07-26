@@ -10,11 +10,13 @@ import {
 import { connect } from 'react-redux';
 import ImagePicker from 'react-native-image-picker';
 import Calendar from 'react-native-calendar-select';
-import firebase from 'react-native-firebase';
+// import firebase from 'react-native-firebase';
+import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { styles, colors } from '../styles';
 import { Input, Btn, PickDate } from '../components';
 import { calendarCustomI18n, calendarColor, pickerOptions } from '../Utils';
+import { addOffer } from '../actions/OfferActions';
 
 class AddOffer extends Component {
   constructor(props) {
@@ -31,8 +33,7 @@ class AddOffer extends Component {
   openCalendar() {
     this.calendar && this.calendar.open();
   }
-  componentDidMount(){
-  }
+  componentDidMount() {}
   confirmDate = date => {
     const startMoment = date.startMoment.format('ddd, M YYYY');
     const endMoment = date.endMoment.format('ddd, M YYYY');
@@ -46,24 +47,23 @@ class AddOffer extends Component {
         console.log('ImagePicker Error: ', response.error);
       } else {
         console.log(response);
-        firebase
-          .storage()
-          .ref('img')
-          .putFile(response.uri)
-          .then(uploadedFile => {
-            alert('Saved');
-            console.log(uploadedFile);
-          })
-          .catch(err => {
-            alert('Something went wrong');
-            console.log(err);
-          });
         let source = { uri: response.uri };
         this.setState({
+          imgSrc: response.uri,
           promoPic: source
         });
       }
     });
+  };
+  add = () => {
+    console.log(this.state);
+    const data = {
+      title: this.state.title,
+      description: this.state.description,
+      offer: this.state.offer,
+      image: this.state.imgSrc
+    };
+    this.props.addOffer(data);
   };
   render() {
     return (
@@ -139,7 +139,7 @@ class AddOffer extends Component {
                   </View>
                 </TouchableOpacity>
               )}
-              <Btn />
+              <Btn action={() => this.add()} />
             </View>
           </View>
         </View>
@@ -148,8 +148,12 @@ class AddOffer extends Component {
   }
 }
 const mapStateToProps = state => ({});
-const mapDispatchToProps = dispatch => ({});
-
+const mapDispatchToProps = dispatch => ({
+  addOffer: data => dispatch(addOffer(data))
+});
+AddOffer.propTypes = {
+  addOffer: PropTypes.func
+};
 export default connect(
   mapStateToProps,
   mapDispatchToProps
