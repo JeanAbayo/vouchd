@@ -9,3 +9,8 @@ export const ADD_OFFER = 'ADD_OFFER';
 export const ADDING_OFFER = 'ADDING_OFFER';
 export const ADDED_OFFER = 'ADDED_OFFER';
 export const ADD_OFFER_ERROR = 'ADD_OFFER_ERROR';
+
+export const ADD_SHOP = 'ADD_SHOP';
+export const ADDING_SHOP = 'ADDING_SHOP';
+export const ADDED_SHOP = 'ADDED_SHOP';
+export const ADD_SHOP_ERROR = 'ADD_SHOP_ERROR';
