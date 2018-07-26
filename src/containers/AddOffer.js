@@ -10,6 +10,7 @@ import {
 import { connect } from 'react-redux';
 import ImagePicker from 'react-native-image-picker';
 import Calendar from 'react-native-calendar-select';
+import firebase from 'react-native-firebase';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { styles, colors } from '../styles';
 import { Input, Btn, PickDate } from '../components';
@@ -30,6 +31,8 @@ class AddOffer extends Component {
   openCalendar() {
     this.calendar && this.calendar.open();
   }
+  componentDidMount(){
+  }
   confirmDate = date => {
     const startMoment = date.startMoment.format('ddd, M YYYY');
     const endMoment = date.endMoment.format('ddd, M YYYY');
@@ -42,6 +45,19 @@ class AddOffer extends Component {
       } else if (response.error) {
         console.log('ImagePicker Error: ', response.error);
       } else {
+        console.log(response);
+        firebase
+          .storage()
+          .ref('img')
+          .putFile(response.uri)
+          .then(uploadedFile => {
+            alert('Saved');
+            console.log(uploadedFile);
+          })
+          .catch(err => {
+            alert('Something went wrong');
+            console.log(err);
+          });
         let source = { uri: response.uri };
         this.setState({
           promoPic: source

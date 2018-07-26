@@ -67,7 +67,7 @@ export default class App extends Component {
                 key="settings"
                 component={Settings}
                 title="Settings"
-                hideNavBar={false}
+                hideNavBar={true}
               />
             </Tabs>
           </Modal>

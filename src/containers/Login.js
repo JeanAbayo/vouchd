@@ -3,8 +3,11 @@ import { View, ImageBackground, TouchableHighlight, Text } from 'react-native';
 import { _ } from 'lodash';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as FBSDK from 'react-native-fbsdk';
+import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import PropTypes from 'prop-types';
 import firebase from 'react-native-firebase';
+import { gotUser } from '../actions/UserActions';
 import { styles } from '../styles';
 
 const { LoginManager, AccessToken } = FBSDK;
@@ -14,19 +17,19 @@ const loginWithFb = accessToken => {
     .auth()
     .signInAndRetrieveDataWithCredential(credential)
     .then(result => {
-      console.log(result);
+      return result;
     })
     .catch(error => {
       alert('Something went wrong');
-      console.log(error);
+      return error;
     });
 };
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
-  handleFacebookLogin() {
+  handleFacebookLogin = () => {
     LoginManager.logInWithReadPermissions(['public_profile', 'email']).then(
       result => {
         if (result.isCancelled) {
@@ -41,7 +44,13 @@ export default class Login extends Component {
                 console.log(data);
                 loginWithFb(data.accessToken)
                   .then(result => {
-                    console.log();
+                    const user = {
+                      name: result.user.displayName,
+                      photo: result.user.photoURL,
+                      email: result.user.email,
+                      uuid: result.user.uid
+                    };
+                    this.props.gotUser(user);
                     return Actions.account({ type: 'reset' });
                   })
                   .catch(error => {
@@ -87,3 +96,15 @@ export default class Login extends Component {
     );
   }
 }
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = dispatch => ({
+  gotUser: data => dispatch(gotUser(data))
+});
+Login.propTypes = {
+  gotUser: PropTypes.func
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);

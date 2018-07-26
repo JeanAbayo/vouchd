@@ -1,58 +1,33 @@
-// import {
-//   CHECKING_TOKEN,
-//   SUCCESS_TOKEN,
-//   NO_TOKEN,
-//   LOGOUT
-// } from '../actions/Constants';
+import {
+  GOT_USER,
+} from '../actions/Constants';
 /**
  * User Reducer
  */
 const initialState = {
-  names: 'Kalis'
+  loading: false,
+  error: false,
+  logged_in: false,
+  errors: {},
+  name: null,
+  uuid: null,
+  photo: null,
+  message: null,
 };
 export default function UserReducer(state = initialState, action) {
+  console.log(action);
   switch (action.type) {
-    case 'CHECKING_TOKEN':
-      return {
-        ...state,
-        loading: true,
-        error: false,
-        logged_in: false,
-        errors: {},
-        token: null,
-        message: 'Loading ...'
-      };
-    case 'SUCCESS_TOKEN':
+    case GOT_USER:
       return {
         ...state,
         loading: false,
         error: false,
         logged_in: true,
         errors: {},
-        token: action.data.access_token,
-        user: action.data.user,
-        message: null
-      };
-    case 'NO_TOKEN':
-      return {
-        ...state,
-        loading: false,
-        error: false,
-        logged_in: false,
-        logged_out: true,
-        errors: {},
-        message: null
-      };
-    case 'LOGOUT':
-      return {
-        ...state,
-        loading: false,
-        error: false,
-        logged_in: false,
-        errors: {},
-        token: null,
-        user: {},
-        message: action.data.message
+        name: action.data.name,
+        uuid: action.data.uuid,
+        photo: action.data.photo,
+        message: ''
       };
     default:
       return state;

@@ -170,6 +170,12 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     flex: 1,
     flexDirection: 'row'
+  },
+  topBlockNav:{
+    paddingTop: 20,
+    paddingLeft: 15,
+    paddingBottom: 5,
+    flexDirection: 'row',
   }
 });
 export { styles };
