@@ -4,10 +4,23 @@ import { Actions } from 'react-native-router-flux';
 import Animation from 'lottie-react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import * as FBSDK from 'react-native-fbsdk';
+import firebase from 'react-native-firebase';
 import anim from '../assets/anim/logo-anim.json';
 import { styles, splashGradient } from '../styles';
 
 const { AccessToken } = FBSDK;
+const loginWithFb = accessToken => {
+  const credential = firebase.auth.FacebookAuthProvider.credential(accessToken);
+  return firebase
+    .auth()
+    .signInAndRetrieveDataWithCredential(credential)
+    .then(result => {
+      console.log(result);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
 export default class Splash extends Component {
   componentDidMount() {
     this.animation.play();
@@ -15,6 +28,14 @@ export default class Splash extends Component {
       AccessToken.getCurrentAccessToken()
         .then(data => {
           if (data) {
+            // console.log(data.accessToken);
+            loginWithFb(data.accessToken)
+              .then(result => {
+                console.log(result);
+              })
+              .catch(error => {
+                console.log(error);
+              });
             Actions.account({ type: 'reset' });
           } else {
             Actions.login({ type: 'reset' });

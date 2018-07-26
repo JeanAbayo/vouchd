@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Router, Scene, Modal, Tabs } from 'react-native-router-flux';
-// import { ApolloClient } from 'apollo-client';
-// import { ApolloProvider } from 'react-apollo';
+import { connect, Provider } from 'react-redux';
 import Splash from './containers/Splash';
 import Login from './containers/Login';
 import Home from './containers/Home';
@@ -11,62 +10,69 @@ import { TabBar } from './components';
 import AddOffer from './containers/AddOffer';
 import SavedOffers from './containers/SavedOffers';
 import Shops from './containers/Shops';
-// const client = new ApolloClient();
+import store from './config/ConfigureStore';
+
+const RouterWithRedux = connect()(Router);
 
 export default class App extends Component {
   render() {
     return (
-      // <ApolloProvider client={client}>
-      <Router>
-        <Modal key="root" hideNavBar>
-          <Scene
-            key="splash"
-            component={Splash}
-            title="Hello"
-            hideNavBar={true}
-          />
-          <Scene
-            key="login"
-            component={Login}
-            title="Login"
-            hideNavBar={true}
-          />
-          <Tabs key="account" tabBarComponent={TabBar}>
-            <Scene key="home" component={Home} title="Home" hideNavBar={true} />
+      <Provider store={store}>
+        <RouterWithRedux>
+          <Modal key="root" hideNavBar>
             <Scene
-              key="offers"
-              component={Offers}
-              title="Offers"
-              hideNavBar={false}
+              key="splash"
+              component={Splash}
+              title="Hello"
+              hideNavBar={true}
             />
             <Scene
-              key="shops"
-              component={Shops}
-              title="Shops"
-              hideNavBar={false}
+              key="login"
+              component={Login}
+              title="Login"
+              hideNavBar={true}
             />
-            <Scene
-              key="addOffer"
-              component={AddOffer}
-              title="Add Offer"
-              hideNavBar={false}
-            />
-            <Scene
-              key="savedOffers"
-              component={SavedOffers}
-              title="Starred offers"
-              hideNavBar={false}
-            />
-            <Scene
-              key="settings"
-              component={Settings}
-              title="Settings"
-              hideNavBar={false}
-            />
-          </Tabs>
-        </Modal>
-      </Router>
-      // </ApolloProvider>
+            <Tabs key="account" tabBarComponent={TabBar}>
+              <Scene
+                key="home"
+                component={Home}
+                title="Home"
+                hideNavBar={true}
+              />
+              <Scene
+                key="offers"
+                component={Offers}
+                title="Offers"
+                hideNavBar={false}
+              />
+              <Scene
+                key="shops"
+                component={Shops}
+                title="Shops"
+                hideNavBar={false}
+              />
+              <Scene
+                key="addOffer"
+                component={AddOffer}
+                title="Add Offer"
+                hideNavBar={false}
+              />
+              <Scene
+                key="savedOffers"
+                component={SavedOffers}
+                title="Starred offers"
+                hideNavBar={false}
+              />
+              <Scene
+                key="settings"
+                component={Settings}
+                title="Settings"
+                hideNavBar={false}
+              />
+            </Tabs>
+          </Modal>
+        </RouterWithRedux>
+      </Provider>
     );
   }
 }

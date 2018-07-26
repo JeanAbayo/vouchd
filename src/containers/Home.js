@@ -107,9 +107,7 @@ export default class Home extends Component {
           barStyle="light-content"
         />
         <View style={styles.mapContainer}>
-          <View
-            style={styles.mapCarousel}
-          >
+          <View style={styles.mapCarousel}>
             <Carousel
               //ref={(c) => { this._carousel = c; }}
               data={fixtures.shops}
@@ -131,10 +129,10 @@ export default class Home extends Component {
             loadingEnabled={true}
             showsUserLocation={true}
             initialRegion={{
-              latitude: loc.latitude,
-              longitude: loc.longitude,
-              latitudeDelta: loc.latitudeDelta,
-              longitudeDelta: loc.longitudeDelta
+              latitude: 1.2185,
+              longitude: 36.8869,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421
             }}
           />
         </View>

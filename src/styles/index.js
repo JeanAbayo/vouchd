@@ -4,6 +4,11 @@ export const splashGradient = [
   'rgba(255,255,255,0.01)',
   'rgba(255,255,255,0)'
 ];
+
+export const colors = {
+  primary: '#007a87'
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -145,6 +150,26 @@ const styles = StyleSheet.create({
   },
   white: {
     color: '#FFFFFF'
+  },
+  imgBlockPicker: {
+    margin: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#eee'
+  },
+  imgPicker: {
+    flexDirection: 'row',
+    margin: 10,
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: colors.primary
+  },
+  imgPickerBtn: {
+    height: 40,
+    justifyContent: 'center',
+    paddingLeft: 10,
+    flex: 1,
+    flexDirection: 'row'
   }
 });
 export { styles };
