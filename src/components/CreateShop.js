@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { styles, colors } from '../styles';
 import { Input } from '../components';
+import { addShop } from '../actions/ShopActions';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {
   Modal,
@@ -20,7 +22,11 @@ class CreateForm extends Component {
   };
 
   addShop = () => {
-    console.log('==============');
+    const data = {
+      name: this.state.title,
+      location: this.state.description,
+    };
+    this.props.addShop(data);
   };
   render() {
     const { modalVisible } = this.props;
@@ -115,9 +121,16 @@ class CreateForm extends Component {
   }
 }
 
+const mapStateToProps = state => ({});
+const mapDispatchToProps = dispatch => ({
+  addShop: data => dispatch(addShop(data))
+});
 CreateForm.propTypes = {
   modalVisible: PropTypes.bool,
   setModalVisible: PropTypes.func,
+  addShop: PropTypes.func,
 };
-
-export default CreateForm;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CreateForm);
