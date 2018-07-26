@@ -3,10 +3,24 @@ import { View, ImageBackground, TouchableHighlight, Text } from 'react-native';
 import { _ } from 'lodash';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as FBSDK from 'react-native-fbsdk';
-import { styles } from '../styles';
 import { Actions } from 'react-native-router-flux';
-const { LoginManager } = FBSDK;
+import firebase from 'react-native-firebase';
+import { styles } from '../styles';
 
+const { LoginManager, AccessToken } = FBSDK;
+const loginWithFb = accessToken => {
+  const credential = firebase.auth.FacebookAuthProvider.credential(accessToken);
+  return firebase
+    .auth()
+    .signInAndRetrieveDataWithCredential(credential)
+    .then(result => {
+      console.log(result);
+    })
+    .catch(error => {
+      alert('Something went wrong');
+      console.log(error);
+    });
+};
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +28,7 @@ export default class Login extends Component {
   }
   handleFacebookLogin() {
     LoginManager.logInWithReadPermissions(['public_profile', 'email']).then(
-      function(result) {
+      result => {
         if (result.isCancelled) {
           alert('Login with your Facebook account!');
         } else {
@@ -22,7 +36,19 @@ export default class Login extends Component {
             _.includes(result.grantedPermissions, 'email') &&
             _.includes(result.grantedPermissions, 'public_profile')
           ) {
-            Actions.account({ type: 'reset' });
+            AccessToken.getCurrentAccessToken()
+              .then(data => {
+                console.log(data);
+                loginWithFb(data.accessToken)
+                  .then(result => {
+                    console.log();
+                    return Actions.account({ type: 'reset' });
+                  })
+                  .catch(error => {
+                    console.log('Something went wrong');
+                  });
+              })
+              .catch(() => {});
           } else {
             alert(
               'Please let us know, By granting access to your facebook profile'

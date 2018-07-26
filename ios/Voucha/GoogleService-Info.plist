@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>480988617340-tb6aj75aeu1a3pt33fmbgj9knhm3sjdi.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.480988617340-tb6aj75aeu1a3pt33fmbgj9knhm3sjdi</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCWDCMpcWkHnyxkHWJQnha6yi8ECwDA_gc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>480988617340</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.community.Voucha</string>
+	<key>PROJECT_ID</key>
+	<string>voucha-b7fe0</string>
+	<key>STORAGE_BUCKET</key>
+	<string>voucha-b7fe0.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:480988617340:ios:bc1a4b67b97b1734</string>
+	<key>DATABASE_URL</key>
+	<string>https://voucha-b7fe0.firebaseio.com</string>
+</dict>
+</plist>
